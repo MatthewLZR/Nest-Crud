@@ -1,9 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Query, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Query, Put,UseGuards } from '@nestjs/common';
 import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { Game } from './entities/game.entity';
 import { Request } from 'express';
+import { AuthGuard } from '@nestjs/passport'; 
+
+@UseGuards(AuthGuard('jwt'))
+
 @Controller('game')
 export class GameController {
   constructor(private readonly gameService: GameService) {}
